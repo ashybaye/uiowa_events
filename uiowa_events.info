@@ -3,6 +3,7 @@ description = Provides dynamic views from the University of Iowa events promotio
 core = 7.x
 package = University of Iowa
 
+dependencies[] = ctools
 dependencies[] = imagecache_external
 files[] = uiowa_events.module
 files[] = uiowa_events.install
