@@ -4,7 +4,7 @@ Drupal module to provide dynamic views from the University of Iowa events promot
 ## Installation
 Install the module per usual Drupal module installation instructions.
 
-There are currently no dependencies.
+Depends on Imagecache External - https://drupal.org/project/imagecache_external
 
 ## Configuration
 An configuration form is available at Admin > Configuration > User Interface >
