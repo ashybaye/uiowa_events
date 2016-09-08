@@ -7,7 +7,7 @@ Install the module per usual Drupal module installation instructions.
 There are currently no dependencies.
 
 ## Configuration
-An configuration form is available at Admin > Configuration > User Interface >
+A configuration form is available at Admin > Configuration > User Interface >
 University of Iowa Events (admin/config/user-interface/uiowa-events)
 
 This configuration form provides site-wide and main event page options.
