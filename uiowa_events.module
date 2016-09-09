@@ -219,6 +219,7 @@ function uiowa_events_full_listing($length = NULL, $date = NULL) {
     $page = 1;
   }
 
+  if (!cache_get('uiowa_events_full_listing_' . $length . "_" . $date . "_" . $page)) {
     switch ($length) {
       case 'day':
         $localist_events = uiowa_events_load($days = 1, $type, $start = $date);
@@ -275,18 +276,24 @@ function uiowa_events_full_listing($length = NULL, $date = NULL) {
       array_push($data, $new_event);
     }
 
+    // Pass Localist page data to theming functions using 'pages' key.
+    if (isset($events['page'])) {
+      $pages = $events['page'];
+    }
+
     $variables = array(
       'data' => $data,
       'title' => 'Events',
       'date' => $date,
       'length' => $length,
+      'pages' => $pages,
     );
 
-    cache_set('uiowa_events_full_listing_' . $length . "_" . $date, $variables, 'cache', REQUEST_TIME + (60 * variable_get('uiowa_events_cache_time')));
+    cache_set('uiowa_events_full_listing_' . $length . "_" . $date . "_" . $page, $variables, 'cache', REQUEST_TIME + (60 * variable_get('uiowa_events_cache_time')));
 
   }
   else {
-    $variables = cache_get('uiowa_events_full_listing_' . $length . "_" . $date)->data;
+    $variables = cache_get('uiowa_events_full_listing_' . $length . "_" . $date . "_" . $page)->data;
   }
 
   $uiowa_events_path = drupal_get_path('module', 'uiowa_events') . '/includes';
