@@ -222,18 +222,16 @@ function uiowa_events_full_listing($length = NULL, $date = NULL) {
   if (!cache_get('uiowa_events_full_listing_' . $length . "_" . $date . "_" . $page)) {
     switch ($length) {
       case 'day':
-        $localist_events = uiowa_events_load($days = 1, $type, $start = $date);
+        $localist_events = uiowa_events_load($days = 1, $type, $start = $date, NULL, $page);
         break;
 
       case 'week':
-        $localist_events = uiowa_events_load($days = 7, $type, $start = $date);
+        $localist_events = uiowa_events_load($days = 7, $type, $start = $date, NULL, $page);
         break;
 
       case 'month':
-
         $end = date('Y-m-d', strtotime('first day of next month', strtotime($date)));
-
-        $localist_events = uiowa_events_load(NULL, $type, $date, $end);
+        $localist_events = uiowa_events_load(NULL, $type, $date, $end, $page);
         break;
 
       default:
