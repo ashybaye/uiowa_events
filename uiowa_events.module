@@ -149,12 +149,13 @@ function month_date_to_arg($arg) {
  * @return object
  *    A request object.
  */
-function uiowa_events_load($days = NULL, $type = NULL, $start = NULL, $end = NULL) {
+function uiowa_events_load($days = NULL, $type = NULL, $start = NULL, $end = NULL, $page = NULL) {
 
   $localist_url = "http://events.uiowa.edu/api/2/events";
 
   $parameters = array(
     'pp' => '25',
+    'page' => $page,
   );
 
   if (!empty($type)) {
