@@ -50,6 +50,41 @@ function template_preprocess_uiowa_events_full_listing(&$variables) {
       '#external_link' => $external_link,
     );
   }
+
+  // Render the pager if necessary.
+  if ($variables['pages']['total'] > 1) {
+    $links = array();
+    $path = current_path();
+
+    for ($i = 1; $i <= $variables['pages']['total']; $i++) {
+      $link = array(
+        'title' => t('@page_number', array('@page_number' => $i)),
+        'href' => array($path),
+        'query' => array('page' => $i),
+        'attributes' => array(
+          'class' => 'uiowa-events-link',
+        ),
+      );
+
+      // Unset the href key for the current page so it renders as a span.
+      if ($i == $variables['pages']['current']) {
+        unset($link['href']);
+      };
+
+      $links[] = $link;
+    }
+
+   $variables['pager'] = array(
+     '#theme' => 'links',
+     '#links' => $links,
+     '#attributes' => array(
+       'class' => array(
+         'uiowa-events-pager',
+         'inline',
+       ),
+     ),
+   );
+  }
 }
 
 /**
