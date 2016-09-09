@@ -401,3 +401,27 @@ function uiowa_events_theme() {
   );
   return $themes;
 }
+
+/**
+ * Alter the head_title for the events page to adjust Drupal's 'page' addition.
+ *
+ * @todo: Find out where Drupal is altering the head_title when a 'page' query
+ * string parameter is present.
+ */
+function uiowa_events_preprocess_html(&$variables) {
+  if (isset($variables['head_title'], $variables['head_title_array'], $variables['head_title_array']['title'])) {
+    if ($variables['head_title_array']['title'] == 'Events' && stristr($variables['head_title'], 'Page')) {
+      $parameters = drupal_get_query_parameters();
+
+      if (isset($parameters['page'])) {
+        $head_title = array(
+          'title' => strip_tags(drupal_get_title()),
+          'page' => 'Page ' . $parameters['page'],
+          'name' => check_plain(variable_get('site_name')),
+        );
+
+        $variables['head_title'] = implode(' | ', $head_title);
+      }
+    }
+  }
+}
