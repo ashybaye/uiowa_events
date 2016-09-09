@@ -22,5 +22,8 @@
   <?php print render($nav); ?>
   <div class="uiowa-events">
     <?php print render($list); ?>
+    <?php if (isset($pager)): ?>
+        <?php print render($pager); ?>
+    <?php endif; ?>
   </div>
 </div>
