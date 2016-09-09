@@ -209,7 +209,16 @@ function uiowa_events_full_listing($length = NULL, $date = NULL) {
     }
   }
 
-  if (!cache_get('uiowa_events_full_listing_' . $length . "_" . $date)) {
+  // Get the current page from the query string parameters.
+  $parameters = drupal_get_query_parameters();
+
+  if (isset($parameters['page'])) {
+    $page = $parameters['page'];
+  }
+  else {
+    $page = 1;
+  }
+
     switch ($length) {
       case 'day':
         $localist_events = uiowa_events_load($days = 1, $type, $start = $date);
