@@ -66,31 +66,39 @@ function template_preprocess_uiowa_events_full_listing(&$variables) {
  *    Variables from the event data.
  */
 function theme_uiowa_events_full_listing_date_nav($variables) {
-  global $base_url;
   $nav = array();
-  $page_date = $variables['date'];
 
-  $previous = $variables['nav_items']['previous'];
-  $next = $variables['nav_items']['next'];
-  $label = $variables['nav_items']['label'];
-
+  $links = array(
+   'previous' => array(
+     'title' => '<span aria-hidden="true">&laquo;</span>',
+     'href' => $variables['nav_items']['previous'],
+     'html' => TRUE,
+     'attributes' => array(
+       'aria-label' => 'Previous',
+     ),
+   ),
+   'active' => array(
+     'title' => $variables['nav_items']['label'],
+     'attributes' => array(
+       'aria-label' => 'Previous',
+     ),
+   ),
+   'next' => array(
+     'title' => '<span aria-hidden="true">&raquo;</span>',
+     'href' => $variables['nav_items']['next'],
+     'html' => TRUE,
+     'attributes' => array(
+       'aria-label' => 'next',
+     ),
+   ),
+  );
 
   $nav['pagination'] = array(
-    '#prefix' => '<ul class="pagination">',
-    '#markup' => '  <li>
-                      <a href="' . $base_url . $previous . '" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="active">
-                        <a href="#">' . $label . '</a>
-                    </li>
-                    <li>
-                      <a href="' . $base_url . $next . '" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>',
-    '#suffix' => '</ul>',
+    '#theme' => 'links',
+    '#links' => $links,
+    '#attributes' => array(
+      'class' => array('pagination'),
+    ),
   );
 
   return $nav;
