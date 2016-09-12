@@ -41,9 +41,16 @@ function template_preprocess_uiowa_events_full_listing(&$variables) {
     $external_link = TRUE;
   }
 
-  $items = array();
-
   foreach ($variables['data'] as $e) {
+    if (variable_get('uiowa_events_filter_past') == TRUE) {
+      $filter_date = isset($e['end']) ? $e['end'] : $e['start'];
+
+      // Skip this event if it occurred in the past.
+      if (strtotime($filter_date) < strtotime('midnight')) {
+        continue;
+      }
+    }
+
     $variables['list'][] = array(
       '#theme' => 'uiowa_events_teaser',
       '#event' => $e,
