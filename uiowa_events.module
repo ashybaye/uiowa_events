@@ -145,6 +145,8 @@ function month_date_to_arg($arg) {
  *    Start of range. Specified as YYYY-MM-DD.
  * @param string $end
  *    End of range, but does not include this date. Specified as YYYY-MM-DD.
+ * @param  int $page
+ *    The page number to request.
  *
  * @return object
  *    A request object.
