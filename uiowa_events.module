@@ -324,6 +324,13 @@ function _uiowa_events_nav_control($granularity, $date) {
       break;
   }
 
+  // Set the href to NULL to disable previous navigation when filtering past.
+  if (variable_get('uiowa_events_filter_past') == TRUE) {
+    if (strtotime($date) <= strtotime('midnight')) {
+      $nav_values['previous'] = NULL;
+    }
+  }
+
   return $nav_values;
 }
 
