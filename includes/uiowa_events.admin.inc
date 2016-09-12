@@ -72,7 +72,7 @@ function uiowa_events_config_form($form, &$form_state) {
   $form['page']['uiowa_events_filter_past'] = array(
     '#type' => 'checkbox',
     '#title' => t('Filter out past events'),
-    '#description' => t('Check to hide events that have occurred before today. Does not apply to day view.'),
+    '#description' => t('Check to hide events that have occurred before today. This will prevent navigating to past days, weeks and months.'),
     '#default_value' => variable_get('uiowa_events_filter_past', FALSE),
   );
 
