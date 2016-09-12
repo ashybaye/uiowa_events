@@ -56,6 +56,18 @@ function uiowa_events_config_form($form, &$form_state) {
     '#required' => FALSE,
   );
 
+  $form['page']['uiowa_events_display_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Display type'),
+    '#description' => t('How to display the events: with calendar controls or just a list of all upcoming events.'),
+    '#options' => array(
+      'calendar' => t('Calendar'),
+      'list' => t('List'),
+    ),
+    '#default_value' => variable_get('uiowa_events_display_type', 'calendar'),
+    '#required' => TRUE,
+  );
+
   $form['page']['uiowa_events_default_tab'] = array(
     '#type' => 'select',
     '#title' => t('Default menu tab'),
@@ -66,7 +78,14 @@ function uiowa_events_config_form($form, &$form_state) {
     ),
     '#default_value' => variable_get('uiowa_events_default_tab', 'day'),
     '#description' => t('Select the tab to display when visiting the page. Note, if you change this setting, you will need to do a menu cache clear.'),
-    '#required' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="uiowa_events_display_type"]' => array('value' => 'calendar'),
+      ),
+      'required' => array(
+        ':input[name="uiowa_events_display_type"]' => array('value' => 'calendar'),
+      ),
+    ),
   );
 
   $form['page']['uiowa_events_add_event_link'] = array(
