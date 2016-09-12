@@ -18,14 +18,16 @@ function uiowa_events_install() {
  * Implements hook_uninstall().
  */
 function uiowa_events_uninstall() {
-  // Delete the color palette variable.
-  variable_del('uiowa_bar_filter_id');
+  // Delete the filter ID variable.
+  variable_del('uiowa_events_filter_id');
   // Delete the link type variable.
   variable_del('uiowa_events_event_link');
   // Delete the cache time.
   variable_del('uiowa_events_cache_time');
   // Delete the add link variable.
   variable_del('uiowa_events_add_event_link');
+  // Delete the default tab variable.
+  variable_del('uiowa_events_default_tab');
 }
 
 /**
