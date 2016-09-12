@@ -156,7 +156,7 @@ function uiowa_events_load($days = NULL, $type = NULL, $start = NULL, $end = NUL
   $localist_url = "http://events.uiowa.edu/api/2/events";
 
   $parameters = array(
-    'pp' => '25',
+    'pp' => '50',
     'page' => $page,
   );
 
